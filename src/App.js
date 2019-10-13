@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import Login from "./Spotify/LoginSpotify.js";
+import LandingPage from "./components/LandingPage.js";
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
     // Don't call this.setState() here!
@@ -78,10 +78,6 @@ class App extends React.Component {
     });
   }
 
-  buttonClick() {
-    Login.logInWithSpotify();
-  }
-
   playSong() {
     console.log(this.state);
     const { deviceId, token } = this.state;
@@ -105,11 +101,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div className="container">
-          <h1>Guess That Song</h1>
-          <button onClick={this.buttonClick}>Login to Spotify</button>
-          <button onClick={() => {this.playSong()}}>play song</button>
-        </div>
+        <LandingPage />
       </div>
     );
   }
