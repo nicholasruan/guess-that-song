@@ -1,7 +1,8 @@
 import React from 'react';
 import '../App.css';
+import DotLoader from 'react-spinners/DotLoader';
 
-class App extends React.Component {
+class GameStart extends React.Component {
 	constructor(props) {
 		super(props);
 		const hash = window.location.hash
@@ -14,10 +15,11 @@ class App extends React.Component {
 			}
 			return initial;
 		}, {});
-		window.location.hash = '';
+
 		this.state = {
 			token: hash.access_token,
-			deviceId: ""
+			deviceId: "",
+			loading: true
 		};
 	}
 
@@ -25,7 +27,7 @@ class App extends React.Component {
 		if (this.state.token) {
 		 // change the loggedIn variable, then start checking for the window.Spotify variable
 		 this.setState({ loggedIn: true });
-		 this.playerCheckInterval = setInterval(() => this.checkForPlayer(), 1000);
+		 this.playerCheckInterval = setInterval(() => this.checkForPlayer() , 1000);
 		}
 	}
 
@@ -44,6 +46,9 @@ class App extends React.Component {
 			this.createEventHandlers();
 			// finally, connect!
 			this.player.connect();
+			this.setState({
+				loading: false,
+			})
 		}
 	}
 
@@ -61,7 +66,6 @@ class App extends React.Component {
 		this.player.on('account_error', e => { console.error(e); });
 		// loading/playing the track failed for some reason
 		this.player.on('playback_error', e => { console.error(e); });
-
 		// Playback status updates
 		// Ready
 		this.player.on('ready', async data => {
@@ -91,16 +95,57 @@ class App extends React.Component {
 			}),
 		});
 	}
+
   render() {
-    return (
-      <div className="App">
-			<p>Logged In!</p>
-			<button onClick={() => this.playSong()}>press me</button>
-			<div className="bg-overlay"></div>
-			<div className="bg-image"></div>
-      </div>
-    );
+		if (this.state.loading) {
+			return (
+				<div className="App">
+				<div className="loader">
+					<DotLoader
+						sizeUnit={"px"}
+						size={190}
+						color={'white'}
+						loading={this.state.loading}
+					/>
+				</div>
+					<div className="bg-overlay"></div>
+					<div className="bg-image"></div>
+				</div>
+			)
+		} else {
+	    return (
+	      <div className="App">
+				<p>Logged In!</p>
+				<button onClick={() => this.playSong()}>press me</button>
+				<button onClick={() => this.tester()}>get user's playlists</button>
+				<div className="bg-overlay"></div>
+				<div className="bg-image"></div>
+	      </div>
+	    )
+		}
   }
 }
 
-export default App;
+export default GameStart;
+
+// tester() {
+// 	const { token } = this.state;
+// 	fetch("https://api.spotify.com/v1/playlists/37i9dQZF1DX0jgyAiPl8Af/tracks", {
+// 		method: "GET",
+// 		headers: {
+// 			authorization: `Bearer ${token}`,
+// 			"Content-Type": "application/json",
+// 		}
+// 	})
+// 	.then(function(response) {
+// 		if (response.status !== 200) {
+// 			console.log('Looks like there was a problem. Status Code: ' +
+// 				response.status);
+// 			return;
+// 		}
+//
+// 		response.json().then(function(data) {
+// 			console.log(data);
+// 		});
+// 	})
+// }

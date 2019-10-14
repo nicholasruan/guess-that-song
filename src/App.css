@@ -88,4 +88,9 @@ p#footer {
   font-size: 1rem;
 }
 
+.loader {
+  display: inline-block;
+  padding-top: 12rem
+}
+
 /*margin-block-start: 0;*/
