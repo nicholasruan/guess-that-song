@@ -96,6 +96,28 @@ class GameStart extends React.Component {
 		});
 	}
 
+	tester() {
+		const { token } = this.state;
+		fetch("https://api.spotify.com/v1/me/playlists", {
+			method: "GET",
+			headers: {
+				authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			}
+		})
+		.then(function(response) {
+			if (response.status !== 200) {
+				console.log('Looks like there was a problem. Status Code: ' +
+					response.status);
+				return;
+			}
+
+			response.json().then(function(data) {
+				console.log(data);
+			});
+		})
+	}
+
   render() {
 		if (this.state.loading) {
 			return (
@@ -127,25 +149,3 @@ class GameStart extends React.Component {
 }
 
 export default GameStart;
-
-// tester() {
-// 	const { token } = this.state;
-// 	fetch("https://api.spotify.com/v1/playlists/37i9dQZF1DX0jgyAiPl8Af/tracks", {
-// 		method: "GET",
-// 		headers: {
-// 			authorization: `Bearer ${token}`,
-// 			"Content-Type": "application/json",
-// 		}
-// 	})
-// 	.then(function(response) {
-// 		if (response.status !== 200) {
-// 			console.log('Looks like there was a problem. Status Code: ' +
-// 				response.status);
-// 			return;
-// 		}
-//
-// 		response.json().then(function(data) {
-// 			console.log(data);
-// 		});
-// 	})
-// }
