@@ -30,7 +30,7 @@ function Playlists(props) {
 		return (
 	    <div>
 	      <h1 id="playlists-title">Playlists</h1>
-				<div class="container">
+				<div className="container">
 					{playlistsRender}
 				</div>
 	    </div>

@@ -137,6 +137,7 @@ img.playlist-img {
 
 img.playlist-img:hover {
   opacity: .5;
+  cursor: pointer;
 }
 
 .container {

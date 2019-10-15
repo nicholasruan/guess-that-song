@@ -130,7 +130,6 @@ class GameContainer extends React.Component {
 	}
 
   render() {
-
 		if (this.state.loading) {
 			return (
 				<div className="App">
@@ -174,3 +173,22 @@ class GameContainer extends React.Component {
 }
 
 export default GameContainer;
+
+
+/*
+getCategories() {
+	const { token } = this.state;
+	fetch("https://api.spotify.com/v1/browse/categories?limit=50", {
+		method: "GET",
+		headers: {
+			authorization: `Bearer ${token}`,
+			"Content-Type": "application/json",
+		}
+	})
+	.then((resp) => resp.json()) // Transform the data into json
+	.then((data) => {
+		console.log(data)
+	})
+
+}
+*/
