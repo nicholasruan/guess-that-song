@@ -29,8 +29,8 @@ function Playlists(props) {
 	} else {
 		return (
 	    <div>
-	      <h1 id="title">Playlists</h1>
-				<div>
+	      <h1 id="playlists-title">Playlists</h1>
+				<div class="container">
 					{playlistsRender}
 				</div>
 	    </div>

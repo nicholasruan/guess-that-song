@@ -119,6 +119,27 @@ p#footer {
 }
 
 /*** Choose Playlist ***/
-.playlist-img {
-  padding-right: 10px;
+h1#playlists-title {
+  padding-top: 6rem;
+  font-size: 8rem;
+  display: flex;
+  justify-content: center;
+  font-family: 'Rubik';
+  color: white;
+  margin-block-start: 0;
+  margin-bottom: 1.5rem;
+}
+
+img.playlist-img {
+  padding: 5px;
+  transition: all .5s;
+}
+
+img.playlist-img:hover {
+  opacity: .5;
+}
+
+.container {
+  width: 70%;
+  display: inline-block;
 }
