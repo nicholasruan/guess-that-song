@@ -1,8 +1,9 @@
 import React from 'react';
 import '../App.css';
 import { Switch, Route } from 'react-router-dom';
-import Game from '../components/Game';
+import GameMenu from '../components/GameMenu';
 import Genres from '../components/Genres';
+import GameMode from '../components/GameMode';
 import Playlists from '../components/Playlists';
 import DotLoader from 'react-spinners/DotLoader';
 
@@ -29,6 +30,7 @@ class GameContainer extends React.Component {
 
 		this.playSong = this.playSong.bind(this);
 		this.getUserPlaylists = this.getUserPlaylists.bind(this);
+		this.playlistTracks = this.playlistTracks.bind(this);
 	}
 
 	componentDidMount() {
@@ -121,20 +123,22 @@ class GameContainer extends React.Component {
     })
 	}
 
-	playlistTracks(playlistId) {
+	async playlistTracks(playlistId) {
 		const { token } = this.state;
 		// https://api.spotify.com/v1/browse/categories
-		fetch("https://api.spotify.com/v1/playlists/" + playlistId, {
+		let response = await fetch("https://api.spotify.com/v1/playlists/" + playlistId, {
 			method: "GET",
 			headers: {
 				authorization: `Bearer ${token}`,
 				"Content-Type": "application/json",
 			}
 		})
-		.then((resp) => resp.json()) // Transform the data into json
-		.then((data) => {
-			console.log(data)
-		})
+		let data = await response.json();
+		return data;
+		// .then((resp) => resp.json()) // Transform the data into json
+		// .then((data) => {
+		// 	return data;
+		// })
 	}
 
   render() {
@@ -159,7 +163,7 @@ class GameContainer extends React.Component {
 					<Switch>
 						<Route
 							exact path="/gamestart"
-							render={(routerProps) => <Game {...routerProps}
+							render={(routerProps) => <GameMenu {...routerProps}
 							/>}/>
 						<Route
 							path="/gamestart/genremenu"
@@ -169,6 +173,12 @@ class GameContainer extends React.Component {
 							path="/gamestart/playlistmenu"
 							render={(routerProps) => <Playlists {...routerProps}
 							getPlaylists={this.state.userPlaylist}
+							/>}/>
+						<Route
+							path="/gamestart/gamemode/:playlistId"
+							render={(routerProps) => <GameMode {...routerProps}
+							playSong={this.playSong}
+							playlistTracks={this.playlistTracks}
 							/>}/>
 					</Switch>
 					<p id="footer">© Copyright 2019</p>

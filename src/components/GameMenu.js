@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-function Game(props) {
+function GameMenu(props) {
   return (
     <div>
       <h1 id="title">Choose One</h1>
@@ -11,4 +11,4 @@ function Game(props) {
   );
 }
 
-export default Game;
+export default GameMenu;
