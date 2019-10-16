@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import DotLoader from 'react-spinners/DotLoader';
 
 function Playlists(props) {
@@ -11,8 +12,9 @@ function Playlists(props) {
 		setPlaylists(props.getPlaylists);
 	}, [playlists, loading])
 
+
 	const playlistsRender = playlists.map((playlist) =>
-		<img className="playlist-img" src={playlist.images[0].url} key={playlist.name} width="175px"></img>
+		<Link to={{ pathname: '/gamestart/gamemode/' + playlist.id}} key={playlist.name}><img className="playlist-img" src={playlist.images[0].url} width="175px"></img></Link>
 	);
 
 	if (loading) {

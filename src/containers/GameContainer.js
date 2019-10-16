@@ -7,12 +7,6 @@ import Playlists from '../components/Playlists';
 import DotLoader from 'react-spinners/DotLoader';
 
 class GameContainer extends React.Component {
-	// this.state = {
-	// 	token: null,
-	// 	deviceId: null,
-	//
-	// }
-
 	constructor(props) {
 		super(props);
 		const hash = window.location.hash
@@ -38,7 +32,6 @@ class GameContainer extends React.Component {
 	}
 
 	componentDidMount() {
-
 		if (this.state.token) {
 		 // change the loggedIn variable, then start checking for the window.Spotify variable
 		 this.setState({ loggedIn: true });
@@ -61,7 +54,6 @@ class GameContainer extends React.Component {
 			this.createEventHandlers();
 			// finally, connect!
 			this.player.connect();
-
 		}
 	}
 
@@ -94,7 +86,7 @@ class GameContainer extends React.Component {
 		});
 	}
 
-	playSong() {
+	playSong(uri) {
 		const { deviceId, token } = this.state;
 		// https://beta.developer.spotify.com/documentation/web-api/reference/player/transfer-a-users-playback/
 		fetch("https://api.spotify.com/v1/me/player/play?device_id=" + deviceId, {
@@ -106,7 +98,7 @@ class GameContainer extends React.Component {
 			body: JSON.stringify({
 				// true: start playing music if it was paused on the other device
 				// false: paused if paused on other device, start playing music otherwise
-				"uris": ["spotify:track:2ihCaVdNZmnHZWt0fvAM7B"],
+				"uris": [uri],
 				"position_ms" : 55000
 			}),
 		});
@@ -127,6 +119,22 @@ class GameContainer extends React.Component {
 				userPlaylist: data.items
 			})
     })
+	}
+
+	playlistTracks(playlistId) {
+		const { token } = this.state;
+		// https://api.spotify.com/v1/browse/categories
+		fetch("https://api.spotify.com/v1/playlists/" + playlistId, {
+			method: "GET",
+			headers: {
+				authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			}
+		})
+		.then((resp) => resp.json()) // Transform the data into json
+		.then((data) => {
+			console.log(data)
+		})
 	}
 
   render() {
@@ -151,15 +159,15 @@ class GameContainer extends React.Component {
 					<Switch>
 						<Route
 							exact path="/gamestart"
-							render={(routerProps) => <Game {...routerProps} playSong={this.playSong}
+							render={(routerProps) => <Game {...routerProps}
 							/>}/>
 						<Route
 							path="/gamestart/genremenu"
-							render={(routerProps) => <Genres {...routerProps} playSong={this.playSong}
+							render={(routerProps) => <Genres {...routerProps}
 							/>}/>
 						<Route
-							path="/gamestart/playlistmenu" render={(routerProps) => <Playlists {...routerProps}
-							playSong={this.playSong}
+							path="/gamestart/playlistmenu"
+							render={(routerProps) => <Playlists {...routerProps}
 							getPlaylists={this.state.userPlaylist}
 							/>}/>
 					</Switch>
@@ -173,22 +181,3 @@ class GameContainer extends React.Component {
 }
 
 export default GameContainer;
-
-
-/*
-getCategories() {
-	const { token } = this.state;
-	fetch("https://api.spotify.com/v1/browse/categories?limit=50", {
-		method: "GET",
-		headers: {
-			authorization: `Bearer ${token}`,
-			"Content-Type": "application/json",
-		}
-	})
-	.then((resp) => resp.json()) // Transform the data into json
-	.then((data) => {
-		console.log(data)
-	})
-
-}
-*/
