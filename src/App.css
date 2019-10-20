@@ -151,7 +151,7 @@ img.playlist-img:hover {
   margin-top: 9rem;
 }
 
-.song-container {
+.song-container{
   display: flex;
   width: 900px;
   height: 182px;
@@ -160,9 +160,20 @@ img.playlist-img:hover {
   background: rgba(119, 119, 119, 0.5);
 }
 
+.song-container:hover {
+  cursor: pointer;
+  transition: all .5s;
+  background: rgba(167, 167, 167, 0.5);
+}
+
+/*
+RED rgba(255, 0, 0, 0.5);
+GREEN rgba(0, 255, 80, 0.5);
+*/
+
 .album-img {
   margin-left: 20px;
-  margin-right: 55px;
+  margin-right: 47px;
   padding-top: 17px;
   display: block;
 }
