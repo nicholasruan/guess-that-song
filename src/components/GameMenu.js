@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 function GameMenu(props) {
+  localStorage.setItem('result', 0);
   return (
     <div>
       <h1 id="title">Choose One</h1>

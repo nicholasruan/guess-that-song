@@ -5,6 +5,7 @@ import GameMenu from '../components/GameMenu';
 import Genres from '../components/Genres';
 import GameMode from '../components/GameMode';
 import Playlists from '../components/Playlists';
+import Result from '../components/Result';
 import DotLoader from 'react-spinners/DotLoader';
 
 class GameContainer extends React.Component {
@@ -179,6 +180,10 @@ class GameContainer extends React.Component {
 							render={(routerProps) => <GameMode {...routerProps}
 							playSong={this.playSong}
 							playlistTracks={this.playlistTracks}
+							/>}/>
+						<Route
+							path="/gamestart/result"
+							render={(routerProps) => <Result {...routerProps}
 							/>}/>
 					</Switch>
 					<p id="footer">© Copyright 2019</p>

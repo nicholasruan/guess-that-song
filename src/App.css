@@ -197,3 +197,15 @@ h2.album-details {
 #artist {
   font-size: 1.48em;
 }
+
+/*** RESULT ***/
+h1#score {
+  padding-top: .5rem;
+  font-size: 8rem;
+  display: flex;
+  justify-content: center;
+  font-family: 'Rubik';
+  color: white;
+  margin-block-start: 0;
+  margin-bottom: 4rem;
+}

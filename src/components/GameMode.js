@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import SongDisplay from './SongDisplay';
 import DotLoader from 'react-spinners/DotLoader';
+import { useHistory } from "react-router-dom";
 
 function GameMode(props) {
+  let history = useHistory();
   const playlistId = props.location.pathname.split("/")[3];
   const [playlistData, setPlaylistData] = useState([
     {'track':{'name':'', 'uri': '', 'artists': [''], 'album': {'images' :[{'url' : ''}]}}}
@@ -11,9 +13,10 @@ function GameMode(props) {
   const [idx1, setIdx1] = useState(0);
   const [idx2, setIdx2] = useState(0);
   const [loading, setLoad] = useState(true);
+  const quizSize = 30;
 
   useEffect(() => {
-    props.playlistTracks(playlistId).then(data => setPlaylistData(shuffleArr(data.tracks.items).slice(0, 30)));
+    props.playlistTracks(playlistId).then(data => setPlaylistData(shuffleArr(data.tracks.items).slice(0, quizSize)));
     twoRandomIdx(playlistPosition);
     setLoad(false);
   }, [props, playlistId]);
@@ -30,7 +33,7 @@ function GameMode(props) {
 
   const twoRandomIdx = (songIdx) => {
     let vals = [];
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < quizSize; i++) {
       vals.push(i);
     }
     vals.splice(songIdx, 1);
@@ -45,6 +48,9 @@ function GameMode(props) {
   }
 
   const nextSong = () => {
+    if (playlistPosition == 19) {
+      history.push("/gamestart/result");
+    }
     setPlaylistPosition(playlistPosition + 1);
     twoRandomIdx(playlistPosition + 1);
   }
@@ -89,7 +95,6 @@ function GameMode(props) {
 	    <div className="game-display-container">
         {props.playSong(playlistData[playlistPosition].track.uri)}
         {renderSongDisplay}
-        {console.log(songIdx)}
 	    </div>
 	  );
 	}

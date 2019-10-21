@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 function SongDisplay(props) {
 		const nextQuestion = () => {
 			if (props.correctSong) {
+				localStorage.setItem('result', parseInt(localStorage.getItem('result')) + 1);
 				alert("correct");
 			} else {
 				alert("wrong");
