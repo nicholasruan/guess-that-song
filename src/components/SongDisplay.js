@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
+const swal = require('sweetalert2')
 
 function SongDisplay(props) {
 		const nextQuestion = () => {
 			if (props.correctSong) {
 				localStorage.setItem('result', parseInt(localStorage.getItem('result')) + 1);
-				alert("correct");
+				swal.fire({
+					title: 'Correct!',
+					type: 'success',
+					confirmButtonText: 'Next',
+					onClose: () => {
+						props.next();
+					}
+				});
 			} else {
-				alert("wrong");
+				swal.fire({
+					title: 'Wrong',
+					type: 'error',
+					confirmButtonText: 'Next',
+					onClose: () => {
+						props.next();
+					}
+				});
 			}
-			props.next();
 		}
 
 		if (props.playlist[props.idx] === undefined) {

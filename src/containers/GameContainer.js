@@ -30,6 +30,7 @@ class GameContainer extends React.Component {
 		};
 
 		this.playSong = this.playSong.bind(this);
+		this.pauseSong = this.pauseSong.bind(this);
 		this.getUserPlaylists = this.getUserPlaylists.bind(this);
 		this.playlistTracks = this.playlistTracks.bind(this);
 	}
@@ -107,6 +108,18 @@ class GameContainer extends React.Component {
 		});
 	}
 
+	pauseSong() {
+		const { deviceId, token } = this.state;
+		// https://developer.spotify.com/documentation/web-api/reference/player/pause-a-users-playback/
+		fetch("https://api.spotify.com/v1/me/player/pause?device_id=" + deviceId, {
+			method: "PUT",
+			headers: {
+				authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			},
+		});
+	}
+
 	getUserPlaylists() {
 		const { token } = this.state;
 		fetch("https://api.spotify.com/v1/me/playlists?limit=10", {
@@ -179,6 +192,7 @@ class GameContainer extends React.Component {
 							path="/gamestart/gamemode/:playlistId"
 							render={(routerProps) => <GameMode {...routerProps}
 							playSong={this.playSong}
+							pauseSong={this.pauseSong}
 							playlistTracks={this.playlistTracks}
 							/>}/>
 						<Route
