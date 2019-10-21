@@ -14,7 +14,12 @@ function Playlists(props) {
 
 
 	const playlistsRender = playlists.map((playlist) =>
-		<Link to={{ pathname: '/gamestart/gamemode/' + playlist.id}} key={playlist.name}><img className="playlist-img" src={playlist.images[0].url} width="175px"></img></Link>
+		<Link to={{ pathname: '/gamestart/gamemode/' + playlist.id}} key={playlist.name}>
+			<div className="img-wrap">
+				<img className="playlist-img" src={playlist.images[0].url} width="175px"></img>
+				<p className="img-overlay">{playlist.name}</p>
+			</div>
+		</Link>
 	);
 
 	if (loading) {

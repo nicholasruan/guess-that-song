@@ -129,6 +129,37 @@ h1#playlists-title {
   margin-bottom: 1.5rem;
 }
 
+.img-wrap {
+  display: inline-block;
+  position: relative;
+  height: 185px;
+  width: 185px;
+}
+
+.img-overlay {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -19px;
+  bottom: 0;
+  left: 5px;
+  width: 175px;
+  height: 175px;
+  background: #13191ed9;
+  color: #fff;
+  font-family: 'Rubik';
+  font-size: 1.5em;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .4s, visibility .24s;
+}
+
+.img-wrap:hover .img-overlay {
+  visibility: visible;
+  opacity: 1;
+}
+
 img.playlist-img {
   padding: 5px;
   transition: all .5s;
@@ -148,7 +179,7 @@ img.playlist-img:hover {
 
 .game-display-container{
   display: inline-block;
-  margin-top: 9rem;
+  margin-top: 5rem;
 }
 
 .song-container{
@@ -208,4 +239,30 @@ h1#score {
   color: white;
   margin-block-start: 0;
   margin-bottom: 4rem;
+}
+
+/*** Question ANS ***/
+
+.swal2-title {
+  font-family: "Rubik";
+  font-weight: 400 !important;
+  color: white !important;
+}
+.swal2-popup {
+  background: #0e1013 !important;
+  border-radius: 15px !important;
+}
+
+.swal2-styled.swal2-confirm {
+  border: 1px solid white !important;
+  color: #fff !important ;
+  font-weight: 400 !important ;
+  font-family: "Rubik" !important;
+  background-color: #07091a !important;
+}
+
+.swal2-styled.swal2-confirm:hover {
+  background-color: white !important;
+  color: #07091a !important;
+  transition: all .3s;
 }

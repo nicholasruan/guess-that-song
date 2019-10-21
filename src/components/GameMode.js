@@ -48,7 +48,7 @@ function GameMode(props) {
   }
 
   const nextSong = () => {
-    if (playlistPosition == 19) {
+    if (playlistPosition == 10) {
       props.pauseSong();
       history.push("/gamestart/result");
     }

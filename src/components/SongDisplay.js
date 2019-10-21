@@ -35,8 +35,8 @@ function SongDisplay(props) {
 		} else {
 			let trackName = props.playlist[props.idx].track.name;
 
-			if (trackName.length >= 32){
-				trackName = trackName.substring(0, 32) + '...';
+			if (trackName.length >= 30){
+				trackName = trackName.substring(0, 30) + '...';
 			}
 
 			/* TODO:
