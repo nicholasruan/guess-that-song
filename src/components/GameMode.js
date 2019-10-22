@@ -48,7 +48,7 @@ function GameMode(props) {
   }
 
   const nextSong = () => {
-    if (playlistPosition == 10) {
+    if (playlistPosition === 9) {
       props.pauseSong();
       history.push("/gamestart/result");
     }
@@ -59,7 +59,7 @@ function GameMode(props) {
   let songIdx = [idx1, idx2, playlistPosition];
   shuffleArr(songIdx);
   const renderSongDisplay = songIdx.map((idx) => {
-    if (idx == playlistPosition) {
+    if (idx === playlistPosition) {
       return (
         <SongDisplay
             idx={idx}
