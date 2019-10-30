@@ -1,6 +1,6 @@
 # Guess that Song - Spotify Game
 
-A simple quiz web application utilizing the Spotify API, specifically thheir Web API and Web Playback SDK. Upon starting the application, a new Spotify Playback device is created through the browser and the application makes requests to this device to play songs from the user's custom playlists or Spotify's premade playlists. 
+Web app quiz game that utilizes the Spotify API, specifically Spotify's Web API and Web Playback SDK. Upon starting the application, a new Spotify Playback device is created through the browser and the application makes requests to this device to play songs from the user's custom playlists or Spotify's premade playlists. 
 
 ## Technology Stack
 
